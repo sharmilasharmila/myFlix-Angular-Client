@@ -44,7 +44,7 @@ private handleError(error: HttpErrorResponse): any {
 export class UserLoginService {
   constructor(private http: HttpClient) {
   }
-  public userRegistration(userDetails: any): Observable<any> {
+  public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
     catchError(this.handleError)
@@ -459,5 +459,9 @@ export class RemoveFavoriteMovieService {
 }
 
 export class FetchApiDataService {
+  userLogin(userData: { Username: string; Password: string; }) {
+    throw new Error('Method not implemented.');
+  }
+  userRegistration: any;
   constructor() {}
 }
