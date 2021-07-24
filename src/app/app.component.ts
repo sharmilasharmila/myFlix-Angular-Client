@@ -15,7 +15,7 @@ export class AppComponent {
 // This is the function that will open the dialog when the signup button is clicked
   openUserRegistrationDialog(): void {
       this.dialog.open(UserRegistrationFormComponent, {
-      width: '280px'
+
       });
     }
     openUserLoginDialog(): void {
