@@ -160,9 +160,8 @@ export class FetchApiDataService {
     return throwError('Something bad happened; please try again later');
   }
 
-  public getUserMovie(): Observable<any> {
+  public getUser(user: any): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('user');
     return this.http
       .get(apiUrl + 'users/${username}', {
         headers: new HttpHeaders({
@@ -213,30 +212,28 @@ export class FetchApiDataService {
     return throwError('Something bad happened; please try again later');
   }
 
-  public postFavoriteMovie(): Observable<any> {
+  addFavorite(id: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http
-      .post(apiUrl + 'users/:favourite', {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        })
+    const user = localStorage.getItem('user');
+    return this.http.post(apiUrl + `users/${user}/Movies/${id}`, id, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
       })
-      .pipe(map(this.extractPOstFavoriteResponseData), catchError(this.postFavoriteHandleError));
-  }
-  private extractPOstFavoriteResponseData(res: Response | { }): any {
-    const body = res;
-    return body || { };
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.addFavoriteHandleError)
+    );
   }
 
-  private postFavoriteHandleError(error: HttpErrorResponse): any {
+  private addFavoriteHandleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred: ', error.error.message);
+      console.error('Some error occurred:', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
       );
     }
-    return throwError('Something bad happened; please try again later');
+    return throwError('Error adding movie to favorites list, please contact the developer.');
   }
 
   public updateFavoriteMovie(): Observable<any> {
@@ -267,8 +264,8 @@ export class FetchApiDataService {
 
   editUser(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-    return this.http.put(apiUrl + 'users/:Username', userDetails, {headers: new HttpHeaders(
+    const user = localStorage.getItem('user');
+    return this.http.put(apiUrl + `users/${user}`, userDetails, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })

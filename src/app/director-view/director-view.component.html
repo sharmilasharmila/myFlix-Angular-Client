@@ -1,0 +1,18 @@
+<div>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h3>
+        {{ data.Name }}
+      </h3>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-dialog-content>
+    Bio: {{ data.Bio }}
+  </mat-dialog-content>
+  <mat-dialog-content>
+    Birth: {{ data.Birth }}
+  </mat-dialog-content>
+  <mat-dialog-content>
+    Death: {{ data.Death || " " }}
+  </mat-dialog-content>
+</div>
