@@ -10,5 +10,5 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'myFlix-Angular-client';
+  title = 'SharmilaFlix-Angular-client';
 }

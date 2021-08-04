@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatToolbar } from '@angular/material/toolbar'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +9,27 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  constructor() { }
+  /**
+   *
+   * @param router
+   */
+  constructor(
+    private router: Router
+  ) { }
 
+  /**
+   * Logout Button Function
+   */
   logoutUser(): void{
     localStorage.clear();
+    this.router.navigate(['welcome']);
+  }
+
+  /**
+   * User Profile Page
+   */
+  userProfile(): void{
+    this.router.navigate(['user']);
   }
 
 }

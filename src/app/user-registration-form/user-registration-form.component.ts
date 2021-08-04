@@ -21,6 +21,10 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Register User Function
+   */
+
   registerUser(): void{
     this.fetchApiData.userRegistration(this.userData).subscribe((response: any) => {
       this.dialogRef.close();

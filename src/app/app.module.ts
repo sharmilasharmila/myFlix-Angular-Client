@@ -24,7 +24,6 @@ import { UserProfileUpdateComponent } from './user-profile-update/user-profile-u
 import { GenreViewComponent } from './genre-view/genre-view.component';
 import { DirectorViewComponent } from './director-view/director-view.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SynopsisComponenetComponent } from './synopsis-componenet/synopsis-componenet.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -49,7 +48,6 @@ const appRoutes: Routes = [
     GenreViewComponent,
     DirectorViewComponent,
     NavbarComponent,
-    FooterComponent,
     SynopsisComponenetComponent,
   ],
   imports: [

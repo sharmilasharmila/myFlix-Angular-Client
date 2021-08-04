@@ -11,7 +11,7 @@ import { SynopsisComponenetComponent } from '../synopsis-componenet/synopsis-com
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit{
   movies: any[] = [];
   favoriteMovies: any[] = [];
 
@@ -25,6 +25,9 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  /**
+   * Get list of all Movies
+   */
   getMovies(): void{
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -33,12 +36,24 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   *
+   * @param Name
+   * @param Description
+   */
   openGenre(Name: string, Description: string): void {
     this.dialog.open(GenreViewComponent,{
       data: {Name, Description}
     })
   }
 
+  /**
+   *
+   * @param Name
+   * @param Bio
+   * @param Birth
+   * @param Death
+   */
   openDirector(
     Name: string,
     Bio: string,
@@ -50,12 +65,19 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   *
+   * @param synopsis
+   */
   openSynopsis(synopsis: string): void{
     this.dialog.open(SynopsisComponenetComponent,{
       data: synopsis
     })
   }
 
+  /**
+   * Get List of All Favorite Movies
+   */
   getFavoriteMovies():void{
     const user = localStorage.getItem('user')
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -63,14 +85,25 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   *
+   * @param movie
+   * @returns
+   */
+
   isFavorite(movie: string): boolean {
     return this.favoriteMovies.includes(movie);
   };
 
-  onToggleFavoriteMovie(id: string): any {
+  /**
+   *
+   * @param id
+   * @returns
+   */
+   toggleFavouriteMovies(id: string): any {
     if (this.isFavorite(id)) {
       this.fetchApiData.deleteFavoriteMovie(id).subscribe((resp: any) => {
-        this.snackBar.open('Removed from favorites!', 'OK', {
+        this.snackBar.open('Removed from favourites!', 'Ok', {
           duration: 2000,
         });
       });
@@ -78,7 +111,7 @@ export class MovieCardComponent {
       return this.favoriteMovies.splice(index, 1);
     } else {
       this.fetchApiData.addFavorite(id).subscribe((response: any) => {
-        this.snackBar.open('Added to favorites!', 'OK', {
+        this.snackBar.open('Added to favourites!', 'Ok', {
           duration: 2000,
         });
       });

@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,7 +9,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   templateUrl: './user-profile-update.component.html',
   styleUrls: ['./user-profile-update.component.scss']
 })
-export class UserProfileUpdateComponent{
+export class UserProfileUpdateComponent implements OnInit{
 
   @Input() userData = {Username: '', Password: '', Email: '', BirthDay: ''}
 
@@ -22,6 +22,9 @@ export class UserProfileUpdateComponent{
   ngOnInit(): void {
   }
 
+  /**
+   * Edit User Funstion
+   */
   editUser(): void {
     this.fetchApiData.editUser(this.userData).subscribe((response) => {
       this.dialogRef.close();

@@ -10,8 +10,8 @@ export class SynopsisComponenetComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data:{
-      synopsis: string
+    public data: {
+      synopsis: string;
     }
   ) { }
 
